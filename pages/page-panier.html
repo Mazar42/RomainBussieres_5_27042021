@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../style.css">
+    <title>Orinoco - Panier</title>
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="../index.html"><img src="../images/logo-orinoco.png" alt=""></a></div>
+        <div class="panier"><a href="./page-panier.html"><i class="fas fa-shopping-cart"></i></div></a>
+    </header>
+
+    <main>
+
+        <div class="container">  
+            <h1>Mon Panier</h1>  
+            
+          <table class="table">  
+            <tr><th>Article</th><th>Quantité</th><th>Prix</th><th></th></tr>  
+            <tr class="cart-row"><td>#1</td><td><input class="cart-quantity" type="number" value="1"></td><td class="cart-price">10€</td><td><button class="btn btn-danger" type="button">Supprimer</button></td></tr>  
+            <tr class="cart-row"><td>#2</td><td><input class="cart-quantity" type="number" value="1"></td><td class="cart-price">20€</td><td><button class="btn btn-danger" type="button">Supprimer</button></td></tr>  
+            <tr class="cart-row"><td>#3</td><td><input class="cart-quantity" type="number" value="1"></td><td class="cart-price">8€</td><td><button class="btn btn-danger" type="button">Supprimer</button></td></tr>  
+            <tr><th>Total</th><td></td><td id="cart-total-price"></td><td><button class="btn btn-success" id="update-cart" type="button">Actualiser mon panier</button></td></tr>  
+          </table>  
+            
+        </div>
+
+        <div class="container">
+            <p><strong> Pour finaliser votre commande, merci de renseigner les informations suivantes :</strong></p>
+            <form>
+                <div class="form-group">
+                    <label for="fname">Prénom :</label>
+                    <input type="text" class="form-control" id="fname" name="fname">
+                    <label for="lname">Nom :</label>
+                    <input type="text" class="form-control" id="lname" name="lname">
+                </div>
+                <div class="form-group">
+                    <label for="name">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="exemple@email.com">
+                    <small id="emailHelp" class="form-text text-muted">Entrez une adresse email valide</small>
+                </div>
+                <div class="form-group">
+                    <label for="postaddress">Adresse postale :</label>
+                    <input type="text" class="form-control" id="postaddress" placeholder="10, rue des magnolias">
+                </div>
+                <div class="form-group">
+                    <label for="postaddress2">Complément d'adresse :</label>
+                    <input type="text" class="form-control" id="postaddress2" placeholder="3e étage, appartement 1">
+                </div>
+                <div class="form-group">
+                    <label for="zipcode">Code postal :</label>
+                    <input type="text" pattern="[0-9]{5}" class="form-control" id="zipcode">
+                </div>
+                <div class="form-group">
+                    <label for="city">Ville :</label>
+                    <input type="text" class="form-control" id="city">
+                </div>
+            </form>
+
+            <div class="button"><!-- <a href="./confirmation-d-achat.html"> --><button onclick="setData()" class="btn btn-dark">Valider et payer</button></div>
+        </div> 
+    </main>
+
+    <footer>
+        <div class="logo-footer"><img src="../images/logo-orinoco.png" alt=""></div>
+        <div class="link-footer"><a href="#">Nous contacter</a><a href="#">Mentions légales</a><a href="#">Qui sommes-nous ?</a></div>
+    </footer>
+
+    <!-- créer une page avec le résumé du panier dans un tableau
+    (de haut en bas: [nom du produit quantité, prix unitaire]
+                    [prix total]
+                    [formulaire de contact (nom prenom mail adresse code postal)]) -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/ec342d9b50.js" crossorigin="anonymous"></script>
+    <script src="../Scripts/page-panier.js"></script>
+</body>
+</html>

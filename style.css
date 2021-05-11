@@ -1,0 +1,184 @@
+html{
+    scroll-behavior: smooth;
+}
+h1{
+    font-size: 4em;
+    margin: 0 auto;
+}
+h2, h3, h4, nav-item, footer{
+    text-align: center;
+}
+
+h2{
+    background-color: #343434;
+    color: white;
+    border-radius: 50px;
+    padding: 10px;
+}
+
+a{
+    text-decoration: none;
+    color: #343434;
+}
+
+a:hover{
+    text-decoration: none;
+    color: black;
+}
+
+strong{
+    text-decoration: underline;
+}
+
+.hidden{
+    display: none;
+}
+/* ****header***** */
+
+header{
+    display: flex;
+    justify-content: space-between;
+    background-color: #f3e9f1;
+    padding: 50px;
+    margin-bottom: 40px;
+}
+    
+.logo img{
+    object-fit: contain;
+    height: 150px;
+}
+
+.panier{
+    font-size: 2rem;
+    padding-top: 50px;
+}
+
+
+/******* contenu principal page d'accueil *******/
+
+.product-list{
+    background: rgb(230, 230, 230);
+    border-radius: 20px;
+    padding: 25px;
+    margin-top: 25px;
+}
+
+.product{
+    margin: 10px 10px 60px 10px;
+}
+.product p{
+    font-size: 1.3rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-align: justify;
+}
+
+.product-img img{
+    object-fit: cover;
+    width: 250px;
+    height: 100%;
+    border-radius: 10%;
+}
+
+.button{
+ text-align:center;
+ margin: 10px 5% 0 0;
+}
+
+/******* contenu principal page détail produit *******/
+
+.product-detail{
+    margin-bottom: 30px;
+}
+
+.product-detail-img img{
+    object-fit: cover;
+    width: 500px;
+    border-radius: 10%;
+}
+
+.product-options{
+    margin-top: 30px;
+}
+
+/*menu déroulant*/
+
+.lenses-dropdown {
+    color: #343434;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    }
+    .lenses-dropdown:hover {
+    background-color: #343434;
+    color: white;
+    }
+    .dropdown {
+    position: relative;
+    display: inline-block;
+    }
+    .dropdown-child {
+    display: none;
+    background-color: #f3e9f1;
+    min-width: 50px;
+    }
+
+    ul{
+        padding-inline-start: 0px;
+    }
+
+    .dropdown-child li {
+        margin: 0 auto;
+        list-style: none;
+    }
+
+    .dropdown-child :hover{
+        background-color: #343434;
+        color: #f3e9f1;
+    }
+    .active{
+    display: block;
+    }
+
+/******* contenu page panier *******/
+
+.cart-quantity{
+    max-width: 40px;
+}
+
+/******* contenu principal page confirmation *******/
+
+.confirmation h1{
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+/**********footer**********/
+
+footer{
+    background-color: #f3e9f1;
+    padding: 25px;
+    margin-top: 50px;
+}
+
+.logo-footer{
+    height: 100px;
+}
+
+.logo-footer img{
+    object-fit: cover;
+    height: 100%;
+}
+
+.link-footer{
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    max-width: 500px;
+}
+
+.link-footer a:hover{
+    text-decoration: underline;
+}
