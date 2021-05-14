@@ -103,15 +103,23 @@ const extractAndDisplay = () => {
                     const addToCartBtn = document.getElementById("add-to-cart");
 
                     const manageCart = () => {
-                        let ProductInCart = JSON.parse(localStorage.getItem('added-product'))
-
-                        if (ProductInCart === null){
-                            localStorage.setItem("added-product", JSON.stringify(currentProduct));
-                        }
-                        else{
-                            alert ("Ce produit est déjà dans votre panier")
-                        }
+                        // créer un objet product
+                        let product = { id: currentProduct._id, image: currentProduct.imageUrl, name: currentProduct.name, price: currentProduct.price / 100, quantity: 1 }
+    
+                        // recupération du tableau de produits dans le localstorage 
+                        const productsArray = JSON.parse(localStorage.getItem('cart') || "[]");
+    
+                          const found = productsArray.find((element) => element.id === product.id);
+                          // found ? found.quantity++ : productsArray.push(product)
+                          if(found) {
+                            found.quantity++;
+                          } else {
+                            productsArray.push(product)
+                          }
+                          localStorage.setItem('cart', JSON.stringify(productsArray));
+                          alert("Ce produit a été ajouté dans votre panier")
                     }
+    
 
                     addToCartBtn.addEventListener("click", manageCart);
 

@@ -14,40 +14,12 @@ function removeItem(event){
     clickedButton.parentElement.parentElement.remove()
 }
 
-// for (input of quantityInputs){
-//     input.addEventListener('change', updateQuantity)
-// }
+// pseudo code
 
-// function updateQuantity(event){
-//     let input = event.target
-//     if (isNaN(input.value) || input.value <= 0){
-//         input.value = 1
-//     }
-//     updateCartTotal()
-// }
+//dans la fonction removeItem, ajouter la supression totale de l'objet dans localstorage
 
-
-// make the cart values appear in real time
-
-// const updateCartTotal = () => {
-//     let cartItems = document.getElementsByClassName('table')[0]
-//     let cartRows = cartItems.getElementsByClassName('cart-row')
-//     let totalPrice = 0
-//     for (cartRow of cartRows){
-//         let priceElement = cartRow.getElementsByClassName("cart-price")[0]
-//         let quantityElement = cartRow.getElementsByClassName("cart-quantity")[0]
-//         console.log(priceElement, quantityElement);
-//         let unitPrice = priceElement.innerText.split("€")[0]
-//         console.log(unitPrice);
-//         let quantity = quantityElement.value
-//         totalPrice = totalPrice + (unitPrice * quantity)
-//         console.log(totalPrice);
-//     }
-//     document.getElementById("cart-total-price").innerText = totalPrice + "€"
-
-
-// }
-// updateCartTotal();
+// Ajouter des boutons pour augmenter/diminuer la quantité 
+// (ils doivent incrémenter/décrémenter le contenu d'un span qui affiche la valeur sur la page et la valeur lié à la clé quantité dans l'objet)
 
 
 //          ***Form****
