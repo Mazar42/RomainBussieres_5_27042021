@@ -19,6 +19,7 @@ const extractAndDisplay = () => {
             await fetch (`http://localhost:3000/api/cameras/${currentProductId}`)
             .then(res => res.json()).then(currentProduct => 
                 {
+                    // inject relevant HTML according to current product
 
                     productDisplay.innerHTML += `
                     <div class="row">
@@ -63,13 +64,10 @@ const extractAndDisplay = () => {
 
                     let lenseChoice = document.getElementById("lense-choice")
 
-
-
                     for (let lense of currentProduct.lenses)
                     if (lense !== undefined){
                         lenseChoice.innerHTML += `<li> ${lense} </li>`
                     }
-
 
                             //Call lenses menu
 
@@ -80,8 +78,6 @@ const extractAndDisplay = () => {
                         function show(){
                             lenseChoice.classList.toggle("active")
                         }
-
-                
 
                     // Convert and inject price unit
 
@@ -94,7 +90,6 @@ const extractAndDisplay = () => {
                     <div class="col-lg-2"><p><strong>${priceInEuros}€</strong></p></div>
                     <div class="col-lg-1"></div>  
                     `
-
 
                     // ----Fill cart----
 
@@ -117,73 +112,14 @@ const extractAndDisplay = () => {
                             productsArray.push(product)
                           }
                           localStorage.setItem('cart', JSON.stringify(productsArray));
-                          alert("Ce produit a été ajouté dans votre panier")
-                    }
+                          alert("Ce produit a été ajouté à votre panier")
+                    } 
     
-
                     addToCartBtn.addEventListener("click", manageCart);
-
-                    
+  
                 })
-                
-
-                // inject relevant HTML according to current product
-
-                
-
-                        
-
-                        // document.getElementById("add-to-cart").addEventListener("click", manageCart);
-
-                        // function manageCart(){
-
-                        //     localStorage.setItem("added-product-name", currentProduct.name);
-                        //     localStorage.setItem("added-product-price", priceInEuros);
-
-                        // }
-
-                        // function manageCart(){
-
-                        //     //gets products already in storage
-
-                        //     // const getData = () => {
-                        //     //     let firstAddedProductName = localStorage.getItem("added-product-name");
-                        //     //     let firstAddedProductPrice = localStorage.getItem("added-product-price");
-                        //     // }
-
-                        //     // getData();
-
-                        //     let addedProductQuantity = 1;
-
-                        //     if ((firstAddedProductName === undefined) && (firstAddedProductPrice === undefined)){
-
-                        //         localStorage.setItem("added-product-name", currentProduct.name);
-                        //         localStorage.setItem("added-product-price", priceInEuros);
-                        //         localStorage.setItem("added-product-quantity", addedProductQuantity);
-
-                        //     }
-
-                        //     else{
-                        //         addedProductQuantity++;
-                        //     }
-
-                        
-            
-                        // };
-
-                    
-
-                    
-
-                    
-                
-
-        
-
     }
-
     fetchCameras()
-
 }
 extractAndDisplay();
 
