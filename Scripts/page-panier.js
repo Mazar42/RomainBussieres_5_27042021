@@ -2,6 +2,9 @@
 
 // --display selected products in cart--
 
+    //declare what to send eventually
+    let dataToSend ={}
+
     //get array from localstorage
 let cartTable = document.getElementById("cart")
 
@@ -22,7 +25,7 @@ if (productsArray){
                 var cell3 = row.insertCell(2);
                 var cell4 = row.insertCell(3);
                 cell1.innerHTML += `${productName}`;
-                cell2.innerHTML += `<input type="number" value="${productQuantity}" min="0" pattern="[0-9]" class="cart-quantity">`;
+                cell2.innerHTML += `${productQuantity}`;
                 cell3.innerHTML += `${productPrice}€`;
                 cell4.innerHTML += `<button class="btn btn-danger" type="button">Supprimer</button>`;
               }
@@ -85,9 +88,85 @@ function removeItem(event){
     location.reload();
 }
 
+// --Confirm Cart--
+
+//create order array
+let confirmCart = document.getElementById("send-data");
+let orderArray = [];
+// create an object to count occurences of the same id
+let amountOfSameProduct = {};
+let orderId
+
+const createOrderArray = () =>{
+        // push the id of any element of productsArray to orderArray
+        const pushId = () => {
+        for (cartProduct of productsArray){
+            if ((orderId === undefined) || (amountOfSameProduct[orderId] < cartProduct.quantity))
+            orderArray.push(cartProduct.id);  
+            }
+
+        // keep track of how many of each id has been pushed
+
+        for (orderId of orderArray){
+            if (amountOfSameProduct[orderId] === undefined ){
+                amountOfSameProduct[orderId] = 1
+            }else{
+                amountOfSameProduct[orderId]++;
+                }
+        }
+        }
+        pushId();
+        
+        // check if quantity matches occurences in orderArry, if not pushId again. 
+        for (cartProduct of productsArray){
+            if (amountOfSameProduct[orderId] < cartProduct.quantity){
+                pushId();
+            }
+        }
+        
+}
+
+confirmCart.addEventListener('click', createOrderArray)
+
+
 //          ***Form***
 
-//store data according to user input
 
-// create contact object
+// create form object
 
+    //get form
+let myForm = document.getElementById('form');
+    //declare an object to hold the form data
+let formInfo ={}
+    //extract data from form and fill object
+const sendData = async (e) =>{
+    e.preventDefault();
+    //extract data
+    let name = document.getElementById('fname').value;
+    let surname = document.getElementById('lname').value;
+    let postAddress = document.getElementById('postaddress').value;
+    let cityName = document.getElementById('city').value;
+    let eMail = document.getElementById('email').value;
+    //fill object
+    formInfo = {firstName: name, lastName: surname, address: postAddress, city: cityName, email: eMail};
+    //finally regroup both the order array and the form object in one array to be sent
+    dataToSend = {productArray : orderArray, contactObject: formInfo}
+    console.log(dataToSend);
+    //send data
+    try {
+        const response = 
+        fetch('http://localhost:3000/api/cameras/order', {
+        method:'post',
+        body: JSON.stringify(dataToSend),
+        headers : {
+            'Content-Type' : 'application/json'
+        }
+    });
+    } catch (e) {
+        console.error(e);
+        alert ("une erreur s'est produite")
+    }
+    
+}
+
+myForm.addEventListener('submit', sendData)
