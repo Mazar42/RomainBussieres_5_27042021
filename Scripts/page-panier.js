@@ -89,23 +89,148 @@ function removeItem(event){
     location.reload();
 }
 
-// --Confirm Cart--
+//          *** Confirm Cart and Form***
 
-//create order array
-let orderArray = [];
+// --Form Validation--
+//get form
+let myForm = document.querySelector('form');
+//check form inputs
+    // check first name 
+    // listen to first name change
+form.fname.addEventListener('change', function (){
+    validFirstName (this)
+});
 
-//          ***Form***
+const validFirstName = function (inputFirstName) {
+    //create first name checking RegEx
+    let firstNameRegEx = new RegExp(
+        '^[a-zA-Z- ]+$', 'g'
+    );
+    
+    testFirstName = firstNameRegEx.test(inputFirstName.value);
+    
+    if(testFirstName){
+        return true
+    }
+    else{
+        return false
+    }
+    
+}
+
+//check last name
+// listen to last name change
+form.lname.addEventListener('change', function () {
+    validLastName (this)
+});
+
+const validLastName = function (inputLastName) {
+    // create last name checking RegEx
+    let lastNameRegEx = new RegExp(
+        '^[a-zA-Z- ]+$', 'g'
+    );
+
+    testLastName = lastNameRegEx.test(inputLastName.value);
+
+    if(testLastName){
+        return true
+    }
+    else{
+        return false
+    }
+
+};
+
+//check email
+    //listen to email change
+form.email.addEventListener('change', function(){
+     validEmail (this)
+ });
+
+const validEmail = function (inputEmail) {
+    // create email checking RegEx
+    let emailRegEx = new RegExp(
+        '^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.][a-z]{2,10}$',
+        'g'
+    );
+
+    testEmail = emailRegEx.test(inputEmail.value);
+    let small = document.getElementById('emailHelp')
+    if (testEmail) {
+        small.innerHTML = "Adresse Valide";
+        small.classList.add('text-success');
+        small.classList.remove('text-danger');
+        return true
+    } else {
+        small.innerHTML = 'Adresse Non Valide';
+        small.classList.add('text-danger');
+        small.classList.remove('text-success');
+        return false
+    }
+ };
+
+// check address
+ //listen to address change
+form.postaddress.addEventListener('change', function(){
+     validPostAddress (this)
+});
+
+const validPostAddress = function (inputPostAddress){
+    let postAddressRegEx = new RegExp(
+         '^[0-9a-t-,]{1,9}[a-zA-Z0-9- ]+$', 'g'
+    )
+
+    testPostAddress = postAddressRegEx.test(inputPostAddress.value);
+
+    if(testPostAddress){
+        return true
+    }
+    else{
+        return false
+    }
+
+};
+
+// check address
+ //listen to address change
+
+form.city.addEventListener('change', function(){
+    validCity (this)
+});
+
+const validCity = function (inputCity){
+    let cityRegEx = new RegExp(
+        '^[a-zA-Z- ]+$', 'g'
+    )
+
+    testCity = cityRegEx.test(inputCity.value);
+
+    if(testCity){
+        return true
+    }
+    else{
+        return false
+    }
+
+};
+
+form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(validFirstName(form.fname) && validLastName(form.lname) && validEmail(form.email) && validPostAddress(form.postaddress) && validCity(form.city)){
+        sendData();
+    }
+    else{
+        alert("Assurez-vous que tous les champs sont correctement remplis avant de poursuivre.")
+    }
+})
 
 
 // create form object
-
-    //get form
-let myForm = document.getElementById('form');
+    
     //declare an object to hold the form data
 let formInfo ={}
     //extract data from page and fill object
-const sendData = async (e) =>{
-    e.preventDefault();
+const sendData = async () =>{
 
     //extract id from each element in productsArray
     const productsIdArray = productsArray.map(product => product.id)
@@ -120,7 +245,7 @@ const sendData = async (e) =>{
     let eMail = document.getElementById('email').value;
     //fill object
     formInfo = {firstName: name, lastName: surname, address: postAddress, city: cityName, email: eMail};
-    //finally regroup both the order array and the form object in one array to be sent
+    //regroup both the order array and the form object in one array to be sent
     dataToSend = {products: productsIdArray, contact: formInfo}
     console.log(dataToSend);
     //send data
@@ -133,8 +258,11 @@ const sendData = async (e) =>{
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+        console.log(data);
+        let currentOrder = JSON.stringify(data.orderId)
+        localStorage.setItem('Order', currentOrder)
+        window.location.href = './confirmation-d-achat.html';
     })
-    .catch(error => console.error(error));  
+    .catch(error => console.error(error));
+    
 }
-myForm.addEventListener('submit', sendData)
