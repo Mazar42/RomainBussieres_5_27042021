@@ -15,23 +15,32 @@ let productsArray = JSON.parse(localStorage.getItem('cart'));
 if (productsArray){
     const displayCart = () => {
         for (cartProduct of productsArray){
+            let productId = cartProduct.id;
             let productName = cartProduct.name;
             let productQuantity = cartProduct.quantity;
-            let productPrice = cartProduct.price
-            //create and fill rows in cart, according to selected products
-            const addRowInCart = () => {
-                var row = cartTable.insertRow(1);
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                var cell3 = row.insertCell(2);
-                var cell4 = row.insertCell(3);
-                cell1.innerHTML += `${productName}`;
-                cell2.innerHTML += `${productQuantity}`;
-                cell3.innerHTML += `${productPrice}€`;
-                cell4.innerHTML += `<button class="btn btn-danger" type="button">Supprimer</button>`;
-              }
-            addRowInCart();
-            
+            // let productPrice = cartProduct.price
+            //fetch price
+            const fetchCameras = async() => {
+                await fetch (`http://localhost:3000/api/cameras/${productId}`)
+                .then(res => res.json()).then(currentProduct => {
+                    console.log(currentProduct.price)
+                    let productPrice = currentProduct.price / 100;
+                    //create and fill rows in cart, according to selected products
+                    const addRowInCart = () => {
+                        var row = cartTable.insertRow(1);
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+                        var cell3 = row.insertCell(2);
+                        var cell4 = row.insertCell(3);
+                        cell1.innerHTML += `${productName}`;
+                        cell2.innerHTML += `${productQuantity}`;
+                        cell3.innerHTML += `${productPrice}€`;
+                        cell4.innerHTML += `<button class="btn btn-danger" type="button">Supprimer</button>`;
+                    }
+                    addRowInCart();
+                })
+            }
+            fetchCameras();      
         }
     }
     displayCart();

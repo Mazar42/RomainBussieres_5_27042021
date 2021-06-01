@@ -1,10 +1,12 @@
 html{
     scroll-behavior: smooth;
 }
+
 h1{
-    font-size: 4em;
-    margin: 0 auto;
+    font-size: 2em;
+    margin: 0 0 0 0 auto;
 }
+
 h2, h3, h4, nav-item, footer{
     text-align: center;
 }
@@ -37,18 +39,18 @@ header{
     display: flex;
     justify-content: space-between;
     background-color: #f3e9f1;
-    padding: 50px;
-    margin-bottom: 40px;
+    /* padding: 50px;*/
+    margin-bottom: 40px; 
 }
     
 .logo img{
     object-fit: contain;
-    height: 150px;
+    height: 100px;
 }
 
 .panier{
-    font-size: 2rem;
-    padding-top: 50px;
+    font-size: 1.5rem;
+    margin : 30px
 }
 
 
@@ -93,7 +95,7 @@ header{
 
 .product-detail-img img{
     object-fit: cover;
-    width: 500px;
+    width: 75%;
     border-radius: 10%;
 }
 
@@ -180,7 +182,7 @@ header{
 
 footer{
     background-color: #f3e9f1;
-    padding: 25px;
+    padding-bottom: 20px;
     margin-top: 50px;
 }
 
@@ -202,4 +204,40 @@ footer{
 
 .link-footer a:hover{
     text-decoration: underline;
+}
+
+
+@media all and (min-width : 950px){
+
+    header{
+        padding: 50px;
+    }
+
+    .panier{
+        font-size: 2rem;
+        margin : 40px
+    }
+
+    .logo img{
+        object-fit: contain;
+        height: 150px;
+    }
+
+    h1{
+        font-size: 3em;
+    }
+
+    .product-img img{
+        object-fit: cover;
+        width: 250px;
+        height: 100%;
+        border-radius: 10%;
+    }
+    
+
+    footer{
+            padding: 25px;
+    }
+
+
 }
