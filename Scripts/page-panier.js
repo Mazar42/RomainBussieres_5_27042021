@@ -36,6 +36,40 @@ if (productsArray){
                         cell2.innerHTML += `${productQuantity}`;
                         cell3.innerHTML += `${productPrice}€`;
                         cell4.innerHTML += `<button class="btn btn-danger" type="button">Supprimer</button>`;
+
+                        //  -- Modify Cart --
+
+                        // Delete products
+
+                        // get remove buttons
+                        let removeFromCartButton = document.getElementsByClassName("btn-danger");
+
+                        // make remove buttons remove a row
+
+                        for (button of removeFromCartButton){
+                            button.addEventListener("click", removeItem)       
+                        }
+
+                        function removeItem(event){
+
+                            // create variable to name clicked target
+                            let clickedButton = event.target;
+                            // create variable to name the clicked product according to clicked target
+                            let targetedProductName = clickedButton.parentElement.parentElement.children[0].textContent;
+                            // extract the product that has the targeted name from array
+                            const found = productsArray.find(element => element.name === targetedProductName);
+                            // extract the targeted product's id
+                            let targetedProductId = found.id;
+                            console.log(targetedProductId);
+                            // delete said product from array
+                            productsArray = productsArray.filter((elem) => elem.id !== targetedProductId);
+                            console.log(productsArray);
+                            // set updated array in localstorage
+                            localStorage.setItem('cart', JSON.stringify(productsArray));
+                            if (productsArray.length === 0){localStorage.removeItem('cart')}
+                            // reload page to make changes appear
+                            location.reload();
+                        }
                     }
                     addRowInCart();
                 })
@@ -45,6 +79,7 @@ if (productsArray){
     }
     displayCart();
 }
+
 else{
     const displayEmptyCart = () =>{
         var row = cartTable.insertRow(1);
@@ -65,38 +100,7 @@ for (cartProduct of productsArray){
 
 displayCartTotal.innerHTML += `${cartTotal}€`
 
-//  -- Modify Cart --
 
-// Delete products
-
-// get remove buttons
-let removeFromCartButton = document.getElementsByClassName("btn-danger");
-
-// make remove buttons remove a row
-
-for (button of removeFromCartButton){
-    button.addEventListener("click", removeItem)       
-}
-
-function removeItem(event){
-
-    // create variable to name clicked target
-    let clickedButton = event.target;
-    // create variable to name the clicked product according to clicked target
-    let targetedProductName = clickedButton.parentElement.parentElement.children[0].textContent;
-    // extract the product that has the targeted name from array
-    const found = productsArray.find(element => element.name === targetedProductName);
-    // extract the targeted product's id
-    let targetedProductId = found.id;
-    console.log(targetedProductId);
-    // delete said product from array
-    productsArray = productsArray.filter((elem) => elem.id !== targetedProductId);
-    console.log(productsArray);
-    // set updated array in localstorage
-    localStorage.setItem('cart', JSON.stringify(productsArray));
-    // reload page to make changes appear
-    location.reload();
-}
 
 //          *** Confirm Cart and Form***
 
